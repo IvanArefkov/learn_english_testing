@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_field %}
+
+{% block content %}
+<div class="container">
+     <div class="row">
+         <div class="col-12 col-md-5 mx-auto ">
+             <h1 class="text-center">Login</h1>
+             <!--Sign-up Form-->
+             <form class="form-control" action="{{ url_for('routes.login') }}" method="POST">
+                {{form.hidden_tag()}}<!--Form Validation-->
+                {{ render_field(form.email, class="form-control") }}<!--Form email-->
+                {{ render_field(form.password, class="form-control") }}<!--Form password-->
+                <!--Login Button-->
+                <button type="submit" class="btn btn-primary mt-3 me-3">Login</button><br>
+                <!--Sign-up Button-->
+                <a class="link-offset-2 link-underline link-underline-opacity-0 text-center" href="{{url_for('routes.register')}}">
+                    <button type="button" class="btn btn-outline-secondary mt-3">Sign-Up</button>
+                </a>
+            </form>
+         </div>
+     </div>
+</div>
+
+
+{% endblock %}

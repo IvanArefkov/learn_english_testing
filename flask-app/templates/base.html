@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test-Yo-Self</title>
+    {{bootstrap.load_css()}}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% from "bootstrap5/form.html" import render_form %}
+</head>
+
+<body>
+    <div class="container mt-3">
+        <div class="row">
+            <!--FLASHED MESSAGES -->
+            <div class="col-8 mx-auto ">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <div class="alert alert-warning" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        </div>
+    <div class="container mt-5">
+        {% block content %}
+        
+        {% endblock %}
+    </div>
+
+    <!-- Bootstrap JS -->
+{{bootstrap.load_js()}}
+<script>
+    setTimeout(function() {
+        let flashMessages = document.querySelectorAll('.alert');
+        flashMessages.forEach(function(message) {
+            message.style.transition = 'opacity 0.5s ease-out';
+            message.style.opacity = '0';
+            setTimeout(function() {
+                message.remove();
+            }, 500);  // Remove element after fading out
+        });
+    }, 2000);  // 2000 milliseconds = 2 seconds
+</script>
+</body>
+</html>
